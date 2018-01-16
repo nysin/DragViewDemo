@@ -1,6 +1,7 @@
 package dragdemo.helijia.com.dragviewdemo;
 
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private static final int MAXINTANCE_CLICK = 6;//点击事件最大的触发距离
     private int screenWidth, screenHeight;
     private int theDragViewHeight, theDragViewWidth;
+    private int statusBarHeight;//状态栏高度
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 Log.e(MainActivity.class.getSimpleName(), "dragView width:" + theDragViewWidth + ",dragView height:" + theDragViewHeight);
             }
         });
+
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
     }
 
     @Override
@@ -100,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     layoutParams.leftMargin = screenWidth - theDragViewWidth;
                 }
 
-                if (layoutParams.topMargin > screenHeight - theDragViewHeight) {
-//                    layoutParams.topMargin = screenHeight - theDragViewHeight;
+                if (layoutParams.topMargin > screenHeight - theDragViewHeight-statusBarHeight) {
+                    layoutParams.topMargin = screenHeight - theDragViewHeight-statusBarHeight;
                 }
                 view.setLayoutParams(layoutParams);
                 rl_root.invalidate();
