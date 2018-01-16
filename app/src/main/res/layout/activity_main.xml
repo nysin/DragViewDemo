@@ -7,11 +7,10 @@
     tools:context="dragdemo.helijia.com.dragviewdemo.MainActivity">
 
     <ImageView
-        android:id="@+id/tv"
+        android:id="@+id/imgView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher_round"
-        android:layout_alignParentRight="true"
         />
 
 </RelativeLayout>
